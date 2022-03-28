@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
 
-    <title>Animal Array</title>
+    <title>Associative Array</title>
 <!--styling the header-->
     <style>
 
@@ -28,8 +28,8 @@
     <ul>
         <?php
 
-            foreach ($animals as $animal){
-                echo "<li>$animal</li>";
+            foreach ($person as $feature => $val){
+                echo "<li><strong>$feature</strong>$val</li>";
             }
         ?>
     </ul>
