@@ -7,9 +7,10 @@
     <meta charset="UTF-8">
 
     <title>Animal Array</title>
-
+<!--styling the header-->
     <style>
 
+        
         header{
             background: #e3e3e3;
 
@@ -21,7 +22,7 @@
     </style>
 
 </head>
-
+<!--using a for loop to display all the animals in the array-->
 <body>
 
     <ul>
