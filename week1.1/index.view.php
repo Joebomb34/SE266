@@ -28,7 +28,7 @@
     <ul>
         <?php
 
-            foreach ($person as $feature => $val){
+            foreach ($task as $feature => $val){
                 echo "<li><strong>$feature</strong>$val</li>";
             }
         ?>

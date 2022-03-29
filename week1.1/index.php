@@ -1,9 +1,11 @@
 <?php
 
-$person = [
-    'age' => 26,
-    'hair' => 'brown',
-    'career' => 'Student'
+$task = [
+    'Title' => 'Grocery Shopping',
+    'Due' => 'Tomorrow',
+    'Assigned To' => 'Joe',
+    'Completed' => 'No'
 ];
+
 
 require 'index.view.php';
