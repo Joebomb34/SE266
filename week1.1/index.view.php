@@ -26,12 +26,12 @@
 <body>
 
     <ul>
-        <?php
+        <?php foreach ($task as $key => $val) : ?>
+            <li><strong><?= $key; ?></strong><?= $val; ?></li>
+        <?php endforeach; ?>
 
-            foreach ($task as $feature => $val){
-                echo "<li><strong>$feature</strong>$val</li>";
-            }
-        ?>
+            
+        
     </ul>
 
 </body>
