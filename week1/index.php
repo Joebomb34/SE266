@@ -5,7 +5,7 @@ $animals = [
     'Dog',
     'Cat',
     'Mouse',
-    'pig'
+    'Pig'
 ];
 
 //requireing the html
