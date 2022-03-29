@@ -10,3 +10,4 @@ $animals = [
 
 //requireing the html
 require 'index.view.php';
+?>
