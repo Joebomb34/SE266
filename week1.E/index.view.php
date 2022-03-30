@@ -31,20 +31,36 @@
             <li>
                 <strong>Status: </strong>
 
-                <?= $task['completed'] ? 'Finished' : 'Incomplete'; ?>
+                
 
                 <?php
 //if-else for the completed section to get the same result but have more control over what the program is saying
-                /*if ($task['completed']) {
+                if ($task['completed']) : ?>
+                    <span class="icon">&#9989;</span>
 
-                    echo 'Complete';
 
-                } else {
+                <?php else : ?>
 
-                    echo 'Incomplete';
+                    <span class="icon">Incomplete</span>
 
-                }*/
-                ?>
+                <?php endif; ?>
+        
+            </li>
+
+            <li>
+                <strong>Accepted: </strong>
+
+                
+
+                <?php if ($task['accepted']) : ?>
+                    <span class="icon">&#9989;</span>
+
+
+                <?php else : ?>
+
+                    <span class="icon">No</span>
+
+                <?php endif; ?>
         
             </li>
         
