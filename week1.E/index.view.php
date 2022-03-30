@@ -6,31 +6,47 @@
 
     <meta charset="UTF-8">
 
-    <title>Associative Array</title>
-<!--styling the header-->
-    <style>
-
-        
-        header{
-            background: #e3e3e3;
-
-            padding: 2em;
-
-            text-align: center;
-        }
-
-    </style>
+    <title>Boolean & Conditionals</title>
 
 </head>
-<!--using a for loop to display all the animals in the array-->
+
 <body>
 
-    <ul>
-        <?php foreach ($task as $key => $val) : ?>
-            <li><strong><?= $key; ?></strong><?= $val; ?></li>
-        <?php endforeach; ?>
+    <h1>Task for the Day</h1>
 
-            
+    <ul>
+            <li>
+                <strong>Name: </strong> <?= $task['title']; ?>
+            </li>
+
+            <li>
+                <strong>Due Date: </strong> <?= $task['due']; ?>
+            </li>
+
+            <li>
+                <strong>Person Responsible: </strong> <?= $task['assigned_to']; ?>
+            </li>
+
+<!---Read the boolean and then if it's true say something if it its false say something else.-->
+            <li>
+                <strong>Status: </strong>
+
+                <?= $task['completed'] ? 'Finished' : 'Incomplete'; ?>
+
+                <?php
+//if-else for the completed section to get the same result but have more control over what the program is saying
+                /*if ($task['completed']) {
+
+                    echo 'Complete';
+
+                } else {
+
+                    echo 'Incomplete';
+
+                }*/
+                ?>
+        
+            </li>
         
     </ul>
 
