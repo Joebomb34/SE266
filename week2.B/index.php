@@ -15,12 +15,16 @@ function isDate($dt) {
    }
 }
 
-function bmi ($ft, $inch, $weight) {
-   // you will need to write
+function bmi ($inch, $weight) {
+   $bmi = ($weight / $inch / $inch) * 703;
+   return $bmi;
 }
 
-function bmiDescription ($bmi) {
-   // you will need to write
+function bmiDescription ($bmidesc) {
+    if($bmi <= 18.5):
+        echo "Underweight";
+        
+
 }
 
 
@@ -30,6 +34,8 @@ if(isset($_POST['submitBtn'])){
     $selectedlname = filter_input(INPUT_POST, 'lname');
     $selectedstatus = filter_input (INPUT_POST, 'status');
     $selectedbirth = filter_input(INPUT_POST, 'birthdate');
+    $selectedheight = filter_input(INPUT_POST, 'height');
+    $selectedweight = filter_input(INPUT_POST, 'weight');
       
     echo $selectedfname;
     echo " ";
@@ -40,6 +46,8 @@ if(isset($_POST['submitBtn'])){
     echo $selectedbirth;
     echo " ";
     echo age($selectedbirth);
+    echo " ";
+    echo bmi($selectedheight, $selectedweight);
 }
 
 ?>
@@ -61,6 +69,8 @@ if(isset($_POST['submitBtn'])){
             <strong>Status: </strong><input type="radio" value="Married" name="status">Married
             <input type="radio" value="Single" name="status">Single<br/>
             <strong>Birth Date: </strong><input type="date" value="" name="birthdate"><br/>
+            <strong>Height (in inches): </strong><input type="number" value="" name="height"><br/>
+            <strong>Weight (in pounds): </strong><input type="number" value="" name="weight"><br/>
 
             <input type="submit" name="submitBtn"/>
         </form>
