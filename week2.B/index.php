@@ -17,23 +17,21 @@ function isDate($dt) {
 
 function bmi ($inch, $weight) {
    $bmi = ($weight / $inch / $inch) * 703;
-   return $bmi;
-}
-
-function bmiDescription ($bmidesc) {
-    if($bmi <= 18.5):
-        echo "Underweight";
+   if($bmi <= 18.5):
+        $bmidesc = round($bmi, 1) . " Underweight";
 
     elseif($bmi <= 24.9 && $bmi >= 18.6):
-        echo "Normal Weight";
+        $bmidesc = round($bmi, 1) . " Normal Weight";
 
     elseif($bmi <= 29.9 && $bmi >= 25):
-        echo "Overweight";
+        $bmidesc = round($bmi, 1) . " Overweight";
 
     else:
-        echo "Obsese";
-}
+        $bmidesc = round($bmi, 1) . " Obsese";
 
+    endif;
+   return $bmidesc;
+}
 
 
 if(isset($_POST['submitBtn'])){
@@ -45,16 +43,17 @@ if(isset($_POST['submitBtn'])){
     $selectedweight = filter_input(INPUT_POST, 'weight');
       
     echo $selectedfname;
-    echo " ";
+    echo ' ';
     echo $selectedlname;
-    echo " ";
+    echo ' ';
     echo $selectedstatus;
-    echo " ";
+    echo ' ';
     echo $selectedbirth;
-    echo " ";
+    echo ' ';
     echo age($selectedbirth);
-    echo " ";
+    echo ' ';
     echo bmi($selectedheight, $selectedweight);
+    echo' ';
 }
 
 ?>
@@ -81,6 +80,6 @@ if(isset($_POST['submitBtn'])){
 
             <input type="submit" name="submitBtn"/>
         </form>
-
+        
     </body>
 </html>
