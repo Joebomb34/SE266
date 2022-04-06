@@ -23,8 +23,15 @@ function bmi ($inch, $weight) {
 function bmiDescription ($bmidesc) {
     if($bmi <= 18.5):
         echo "Underweight";
-        
 
+    elseif($bmi <= 24.9 && $bmi >= 18.6):
+        echo "Normal Weight";
+
+    elseif($bmi <= 29.9 && $bmi >= 25):
+        echo "Overweight";
+
+    else:
+        echo "Obsese";
 }
 
 
