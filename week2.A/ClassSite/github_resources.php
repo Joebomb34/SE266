@@ -1,5 +1,5 @@
 
- <?php include __DIR__ . '/../include/header.php'; ?>
+ <?php include_once __DIR__ . '/../include/header.php'; ?>
     <!--used layout from the class site folder-->
  <h2>Git Resources</h2>
        
@@ -12,4 +12,4 @@
     
 
 
-<?php include __DIR__ . '/../include/footer.php'; ?>
+<?php include_once __DIR__ . '/../include/footer.php'; ?>

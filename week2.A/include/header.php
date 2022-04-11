@@ -96,9 +96,9 @@ li {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content" id="myDropdown">
-      <a href="../week1/index.php">Assignment 1</a>
-      <a href="../week2/index.php">Assignment 2</a>
-      <a href="../">Assignment 3</a>
+      <a href="C:\xampp\htdocs\SE266\week1\index.php">Assignment 1</a>
+      <a href="C:\xampp\htdocs\SE266\week2.B\index.php">Assignment 2</a>
+      <a href="C:\xampp\htdocs\SE266\week3\index.php">Assignment 3</a>
       <a href="../">Assignment 4</a>
       <a href="../">Assignment 5</a>
       <a href="../">Assignment 6</a>
@@ -108,10 +108,10 @@ li {
       <a href="../">Assignment 10</a>
     </div>
   </div> 
-  <a href="../ClassSite/index.php">Home</a>
-  <a href="../ClassSite/thingsILike.php">Heroku Resources</a>
-  <a href="../ClassSite/php_resources.php">PHP Resources</a>
-  <a href="../ClassSite/github_resources.php">Git Resources</a>
+  <a href="C:\xampp\htdocs\SE266\week2.A\ClassSite\index.php">Home</a>
+  <a href="C:\xampp\htdocs\SE266\week2.A\ClassSite\thingsILike.php">Things I Like</a>
+  <a href="C:\xampp\htdocs\SE266\week2.A\ClassSite\php_resources.php">PHP Resources</a>
+  <a href="C:\xampp\htdocs\SE266\week2.A\ClassSite\github_resources.php">Git Resources</a>
   <a href="https://github.com/Joebomb34/SE266">My GitHub Repo</a>
 </div>
 

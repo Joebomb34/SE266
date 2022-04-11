@@ -1,5 +1,5 @@
 <!--used layout from the class site folder-->
- <?php include __DIR__ . '/../include/header.php'; ?>
+ <?php include_once __DIR__ . '/../include/header.php'; ?>
     
     
       <h2>things I Like</h2>
@@ -11,4 +11,4 @@
       </ul> 
        
         
-<?php include __DIR__ . '/../include/footer.php'; ?>
+<?php include_once __DIR__ . '/../include/footer.php'; ?>
