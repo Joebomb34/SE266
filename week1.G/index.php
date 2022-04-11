@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . '\..\week2.A\include\header.php';
+
 //defining functions in a seperate file.
 
 require 'functions.php';
@@ -10,5 +12,7 @@ $num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 2
 //using to styleish
 
 require 'index.view.php';
+
+include_once __DIR__ . '\..\week2.A\include\footer.php';
 
 ?>

@@ -58,6 +58,8 @@ if(isset($_POST['submitBtn'])){
 
 ?>
 
+<?php include_once __DIR__ . '\..\week2.A\include\header.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -83,3 +85,5 @@ if(isset($_POST['submitBtn'])){
         
     </body>
 </html>
+
+<?php include_once __DIR__ . '\..\week2.A\include\footer.php'; ?>
