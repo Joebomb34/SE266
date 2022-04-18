@@ -11,8 +11,8 @@ id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
         
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-INSERT INTO patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('Ashley', 'Shaw', '0', '01/23/1996');
-INSERT INTO  patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('John', 'Aaron', '1', '06/02/1980');
-INSERT INTO  patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('Rick', 'Snachez', '0', '05/23/1946');
-INSERT INTO  patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('Alex', 'Smith', '1', '12/04/1954');
-INSERT INTO  patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('Rachel', 'Rodriguez', '1', '03/12/1962');
+INSERT INTO patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('Ashley', 'Shaw', '0', '1996-01-23');
+INSERT INTO  patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('John', 'Aaron', '1', '1980-06-02');
+INSERT INTO  patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('Rick', 'Snachez', '0', '1946-05-23');
+INSERT INTO  patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('Alex', 'Smith', '1', '1954-12-04');
+INSERT INTO  patients (patientFirstName, patientLastName, patientMarried, patientBirthDate) VALUES ('Rachel', 'Rodriguez', '1', '1962-03-12');

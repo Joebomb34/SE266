@@ -16,7 +16,7 @@
     // If POST, delete the requested team before listing all teams
     if (isPostRequest()) {
         $id = filter_input(INPUT_POST, 'patientId');
-        $teamDatabase->deletePatient ($id);
+        $patientDatabase->deletePatient ($id);
 
     }
     $patientListing = $patientDatabase->getPatients();

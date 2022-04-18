@@ -114,7 +114,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="patientBirthDate">Birth Date:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" id="patientBirthDate" placeholder="Enter Birth Date" name="patientBirthDate" value="<?= $patientBirthDate; ?>">
+        <input type="date" class="form-control" id="patientBirthDate" placeholder="Enter Birth Date" name="patientBirthDate" value="<?= $patientBirthDate; ?>">
       </div>
     </div>
     
@@ -125,11 +125,11 @@
     </div>
 </div>
     <p></p>
-    <div class="panel panel-warning">
+    <!-- <div class="panel panel-warning">
     <div class="panel-heading"><strong>This is for testing and verification:</strong></div>    
         Action: <input type="text" name="action" value="<?= $action; ?>">
         Patient ID: <input type="text" name="teamId" value="<?= $id; ?>">
-      </div>
+      </div> -->
 
   </form>
   

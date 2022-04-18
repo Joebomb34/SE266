@@ -5,6 +5,6 @@ function dd($data){
 
     die(var_dump($data));
 
-    echo '</pre>';
+    //echo '</pre>';
 }
 
