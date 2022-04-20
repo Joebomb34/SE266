@@ -22,6 +22,9 @@
     $patientListing = $patientDatabase->getPatients();
     
 ?>
+
+<!--Creating a table for the patients to be displayed in-->
+
 <html lang="en">
 <head>
   <title>View Patient Records</title> 

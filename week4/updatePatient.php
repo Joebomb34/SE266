@@ -70,7 +70,7 @@
   }
       
 ?>
-    
+    <!--Creating the form to be used to update or add a patient to the database-->
 
 <html lang="en">
 <head>

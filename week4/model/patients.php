@@ -85,6 +85,8 @@ class Patients{
     //   $result = addTeam2 ('Ajax', 'Eredivisie');
     //   echo $result;
 
+
+//update function to update the table into the database
     public function updatePatient ($id, $patientFirstName, $patientLastName, $patientMarried, $patientBirthDate)
     {
         $updateSucessful = false;
@@ -103,6 +105,8 @@ class Patients{
         return $updateSucessful;
     }
 
+
+//Delete function to delete a patient from the database
     public function deletePatient ($id)
     {
         $deleteSucessful = false;
@@ -117,6 +121,8 @@ class Patients{
         return $deleteSucessful;
     }
 
+
+//Get listing of patient
     public function getPatient ($id)
     {
         $results = [];
