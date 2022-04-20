@@ -51,7 +51,7 @@ class Patients{
         $stmt = $patientTable->prepare("INSERT INTO patients SET patientFirstName = :patientFirstName, patientLastName = :patientLastName, patientMarried = :patientMarried, patientBirthDate = :patientBirthDate");
 
         $boundParams = array(
-            ":patientFirstname" => $patientFirstName,
+            ":patientFirstName" => $patientFirstName,
             ":patientLastName" => $patientLastName,
             ":patientMarried" => $patientMarried,
             ":patientBirthDate" => $patientBirthDate
@@ -89,7 +89,7 @@ class Patients{
     {
         $updateSucessful = false;
         $patientTable = $this->patientData;
-
+        
         $stmt = $patientTable->prepare("UPDATE patients SET patientFirstName = :patientFirstName, patientLastName = :patientLastName, patientMarried = :patientMarried, patientBirthDate = :patientBirthDate WHERE id = :id");
 
         $stmt->bindValue(':id', $id);
@@ -99,7 +99,7 @@ class Patients{
         $stmt->bindValue(':patientBirthDate', $patientBirthDate);
 
         $updateSucessful = ($stmt->execute() && $stmt->rowCount() > 0);
-
+        
         return $updateSucessful;
     }
 

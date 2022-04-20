@@ -57,11 +57,12 @@
                         <input type="hidden" name="patientId" value="<?= $row['id']; ?>" />
                         <button class="btn glyphicon glyphicon-trash" type="submit"></button>
                         <?php echo $row['patientFirstname']; ?>
-                    </form>   
+                      
                 </td>
                 <td><?php echo $row['patientLastName']; ?></td>
                 <td><?php echo $row['patientMarried']; ?></td>
                 <td><?php echo $row['patientBirthDate']; ?></td>
+                </form> 
                 <td><a href="updatePatient.php?action=Update&patientId=<?= $row['id'] ?>">Update</a></td> 
                 
             </tr>

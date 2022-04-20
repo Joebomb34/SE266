@@ -7,7 +7,7 @@
   $configFile = __DIR__ . '/model/dbconfig.ini';
   try 
   {
-      $patientDatabase = new Patients($configFile);
+      $patientData = new Patients($configFile);
   } 
   catch ( Exception $error ) 
   {
@@ -22,7 +22,7 @@
       $id = filter_input(INPUT_GET, 'patientId', );
       if ($action == "Update") 
       {
-          $row = $patientDatabase->getPatient($id);
+          $row = $patientData->getPatient($id);
           $patientFirstName = $row['patientFirstName'];
           $patientLastName = $row['patientLastName'];
           $patientMarried = $row['patientMarried'];
@@ -45,17 +45,17 @@
       $action = filter_input(INPUT_POST, 'action');
       $id = filter_input(INPUT_POST, 'patientId');
       $patientFirstName = filter_input(INPUT_POST, 'patientFirstName');
-      $patientLastName = filter_input(INPUT_POST, 'patientlastName');
+      $patientLastName = filter_input(INPUT_POST, 'patientLastName');
       $patientMarried = filter_input(INPUT_POST, 'patientMarried');
       $patientBirthDate = filter_input(INPUT_POST, 'patientBirthDate');
 
       if ($action == "Add") 
       {
-          $result = $patientDatabase->addPatient ($patientFirstName, $patientLastName, $patientMarried, $patientBirthDate);
+          $result = $patientData->addPatient ($patientFirstName, $patientLastName, $patientMarried, $patientBirthDate);
       } 
       elseif ($action == "Update") 
       {
-          $result = $patientDatabase->updatePatient ($id, $patientFirstname, $patientLastName, $patientMarried, $patientBirthDate);
+          $result = $patientData->updatePatient ($id, $patientFirstName, $patientLastName, $patientMarried, $patientBirthDate);
       }
 
       // Redirect to patient listing on view.php
@@ -90,6 +90,10 @@
   <div class="panel panel-primary">
 <div class="panel-heading"><h4><?= $action; ?> Patient</h4></div>
 <p></p>
+
+    <div class="form-group">
+      <input type="hidden" name="patientId" value="<?= $id; ?>">
+      </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="patientFirstName">First Name:</label>
       <div class="col-sm-10">
@@ -107,7 +111,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="patientMarried">Marital Status:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" id="patientmarried" placeholder="Enter Marital Status" name="patientMarried" value="<?= $patientMarried; ?>">
+        <input type="text" class="form-control" id="patientMarried" placeholder="Enter Marital Status" name="patientMarried" value="<?= $patientMarried; ?>">
       </div>
     </div>
 
@@ -121,6 +125,8 @@
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default"><?php echo $action; ?> Patient</button>
+        <input type="hidden" name="action" value="<?= $action; ?>">
+        
       </div>
     </div>
 </div>
