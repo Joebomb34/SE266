@@ -141,7 +141,7 @@ class Patients{
 
     //special function accessible to derived classes
     //allows children to make queries to the database
-    protected function getDatabasseRef()
+    protected function getDatabaseRef()
     {
         return $this->patientData;
     }

@@ -95,7 +95,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="patientId">ID:</label>
       <div class="col-sm-10">
-        <input type=" " value="<?= $id; ?>">
+        <input value="<?= $id; ?>">
         </div>
       </div>
     <div class="form-group">

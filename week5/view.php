@@ -41,7 +41,7 @@
     <div class="col-sm-offset-2 col-sm-10">
         <h1>Patient Records</h1>
         <br />
-        <a href="updatePatient.php?action=Add">Add Patient</a>      
+        <a href="updatePatient.php?action=Add">Add Patient</a>  
     <table class="table table-striped">
         <thead>
             <tr>
