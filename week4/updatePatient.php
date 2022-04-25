@@ -93,7 +93,10 @@
 <p></p>
 
     <div class="form-group">
-      <input type="hidden" name="patientId" value="<?= $id; ?>">
+      <label class="control-label col-sm-2" for="patientId">ID:</label>
+      <div class="col-sm-10">
+        <input type=" " value="<?= $id; ?>">
+        </div>
       </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="patientFirstName">First Name:</label>

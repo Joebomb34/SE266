@@ -32,7 +32,7 @@ class Patients{
         $results = [];
         $patientTable = $this->patientData;
 
-        $stmt = $patientTable->prepare("SELECT id, patientFirstname, patientLastName, patientMarried, patientBirthDate FROM patients ORDER BY patientLastName"); 
+        $stmt = $patientTable->prepare("SELECT id, patientFirstName, patientLastName, patientMarried, patientBirthDate FROM patients ORDER BY patientLastName"); 
         
         if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
         {
@@ -45,7 +45,7 @@ class Patients{
 
     //Add a patient to database
     public function addPatient ($patientFirstName, $patientLastName, $patientMarried, $patientBirthDate) {
-        $addSucessful = false;
+        $addSuccessful = false;
         $patientTable = $this->patientData;
 
         $stmt = $patientTable->prepare("INSERT INTO patients SET patientFirstName = :patientFirstName, patientLastName = :patientLastName, patientMarried = :patientMarried, patientBirthDate = :patientBirthDate");
@@ -57,9 +57,9 @@ class Patients{
             ":patientBirthDate" => $patientBirthDate
         );
         
-        $addSucessful = ($stmt->execute($boundParams) && $stmt->rowCount() > 0);
+        $addSuccessful = ($stmt->execute($boundParams) && $stmt->rowCount() > 0);
         
-        return $addSucessful;
+        return $addSuccessful;
     }
    
     // Alternative style to add team records database.
@@ -89,7 +89,7 @@ class Patients{
 //update function to update the table into the database
     public function updatePatient ($id, $patientFirstName, $patientLastName, $patientMarried, $patientBirthDate)
     {
-        $updateSucessful = false;
+        $updateSuccessful = false;
         $patientTable = $this->patientData;
         
         $stmt = $patientTable->prepare("UPDATE patients SET patientFirstName = :patientFirstName, patientLastName = :patientLastName, patientMarried = :patientMarried, patientBirthDate = :patientBirthDate WHERE id = :id");
@@ -100,25 +100,25 @@ class Patients{
         $stmt->bindValue(':patientMarried', $patientMarried);
         $stmt->bindValue(':patientBirthDate', $patientBirthDate);
 
-        $updateSucessful = ($stmt->execute() && $stmt->rowCount() > 0);
+        $updateSuccessful = ($stmt->execute() && $stmt->rowCount() > 0);
         
-        return $updateSucessful;
+        return $updateSuccessful;
     }
 
 
 //Delete function to delete a patient from the database
     public function deletePatient ($id)
     {
-        $deleteSucessful = false;
+        $deleteSuccessful = false;
         $patientTable = $this->patientData;
 
         $stmt = $patientTable->prepare("DELETE FROM patients WHERE id = :id");
 
         $stmt->bindValue(':id', $id);
 
-        $deleteSucessful = ($stmt->execute() && $stmt->rowCount() > 0);
+        $deleteSuccessful = ($stmt->execute() && $stmt->rowCount() > 0);
 
-        return $deleteSucessful;
+        return $deleteSuccessful;
     }
 
 
@@ -139,7 +139,14 @@ class Patients{
         return $results;
     }
 
-}//end class
+    //special function accessible to derived classes
+    //allows children to make queries to the database
+    protected function getDatabasseRef()
+    {
+        return $this->patientData;
+    }
+
+}//end patient class
 
    
 

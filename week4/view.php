@@ -45,6 +45,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Patient First Name</th>
                 <th>Patient Last Name</th>
                 <th>Marrital Status</th>
@@ -60,9 +61,10 @@
                     <form action="view.php" method="post">
                         <input type="hidden" name="patientId" value="<?= $row['id']; ?>" />
                         <button class="btn glyphicon glyphicon-trash" type="submit"></button>
-                        <?php echo $row['patientFirstname']; ?>
+                        <?php echo $row['id']; ?>
                       
                 </td>
+                <td><?php echo $row['patientFirstName']; ?></td>
                 <td><?php echo $row['patientLastName']; ?></td>
                 <td><?php echo $row['patientMarried']; ?></td>
                 <td><?php echo $row['patientBirthDate']; ?></td>
