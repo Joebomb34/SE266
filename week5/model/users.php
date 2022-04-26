@@ -76,19 +76,19 @@ class Users
     // INPUT: user and divison to add
     // RETURNS: True if add is successful, false otherwise
 
-    public function addUser($user, $password) 
+    public function addUser($user, $userPassword) 
     {
         $addSucessful = false;         // user not added at this point
         $userTable = $this->userData;   // Alias for database PDO
         
         $salt = random_bytes(32);
 
-        $stmt = $userTable->prepare("INSERT INTO users SET userName = :user, userPassword = :pwd, userSalt = :salt");
+        $stmt = $userTable->prepare("INSERT INTO users SET user = :userName, userPassword = :userPassword, salt = :salt");
 
         // Bind query parameters to method parameter values
         $boundParams = array(
-            ":user" => $user,
-            ":password" => sha1($salt . $password),
+            ":userName" => $user,
+            ":userPassword" => sha1($salt . $userPassword),
             ":salt" => $salt
         );       
         
@@ -153,7 +153,7 @@ class Users
         if ($foundUser)
         {
             $results = $stmt->fetch(PDO::FETCH_ASSOC); 
-            $hashedPassword = sha1(  $results['userSalt'] . $password);
+            $hashedPassword = sha1( $results['userSalt'] . $password);
             $isValidUser = ($hashedPassword == $results['userPassword']);
         }
         // Note that we prepend salt.

@@ -7,8 +7,8 @@ class PatientSearch extends Patients
 {
 
     // Allows user to search for either first name, last name, married, or birth date
-    // INPUT: first name, last name, married, or birthdate to search for
-    function searchPatients ($patientFirstName, $patientLastName, $patientMarried, $patientBirthDate) 
+    // INPUT: first name, last name, or married to search for
+    function searchPatients ($patientFirstName, $patientLastName, $patientMarried) 
     {
         // Set up all the necessary variables here 
         // to ensure they are scoped for the entire function
@@ -61,20 +61,7 @@ $isFirstClause = true;
             $sqlQuery .= " patientMarried LIKE :patientMarried";
             $binds['patientMarried'] = '%'.$patientMarried.'%';
         }
-        //If Birth date is set, append the First name, last name, married query and bind parameter
-        if ($patientBirthDate != ""){
-            if ($isFirstClause){
-                $sqlQuery .= " WHERE ";
-                $isFirstClause = false;
-            }
-            else{
-                $sqlQuery .= " AND ";
-            }
-            $sqlQuery .= " patientBirthDate LIKE :patientBirthDate";
-            $binds['patientBirthDate'] = '%'.$patientBirthDate.'%';
-        }
-    
-       
+
         // Create query object from the table
         $stmt = $patientTable->prepare($sqlQuery);
 
