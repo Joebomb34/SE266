@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__ . '/model/patients.php';
+include_once __DIR__ . '\patients.php';
 
 // Extending the patients class so we can take advantage of work done earlier
 class PatientSearch extends Patients

@@ -76,19 +76,19 @@ class Users
     // INPUT: user and divison to add
     // RETURNS: True if add is successful, false otherwise
 
-    public function addUser($user, $userPassword) 
+    public function addUser($user, $password) 
     {
         $addSucessful = false;         // user not added at this point
         $userTable = $this->userData;   // Alias for database PDO
         
         $salt = random_bytes(32);
 
-        $stmt = $userTable->prepare("INSERT INTO users SET user = :userName, userPassword = :userPassword, salt = :salt");
+        $stmt = $userTable->prepare("INSERT INTO users SET userName = :user, userPassword = :pwd, userSalt = :salt");
 
         // Bind query parameters to method parameter values
         $boundParams = array(
             ":userName" => $user,
-            ":userPassword" => sha1($salt . $userPassword),
+            ":password" => sha1($salt . $password),
             ":salt" => $salt
         );       
         
@@ -136,17 +136,17 @@ class Users
     // INPUT: username and password from login form
     // RETURN: True if credentials are in database, false otherwise
     //      Password is salted.
-    function validateCredentials($userName, $password)
+    function validateCredentials($username, $password)
     {
         $isValidUser = false;
         $userTable = $this->userData;   // Alias for database PDO
 
         // Create query object with username and password
         // $stmt = $userTable->prepare("SELECT id FROM users WHERE userName =:userName AND userPassword = :password");
-        $stmt = $userTable->prepare("SELECT userPassword, userSalt FROM users WHERE userName =:userName");
+        $stmt = $userTable->prepare("SELECT userPassword, userSalt FROM users WHERE userName = :userName");
  
         // Bind query parameter values
-        $stmt->bindValue(':userName', $userName);
+        $stmt->bindValue(':userName', $username);
 
         $foundUser = ($stmt->execute() && $stmt->rowCount() > 0);
 

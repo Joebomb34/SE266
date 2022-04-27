@@ -4,7 +4,7 @@
     include_once __DIR__ . '/include/functions.php';
 
     // Include user database definitions
-    include_once __DIR__ . '/model/Users.php';
+    include_once __DIR__ . '/model/users.php';
 
     // This loads HTML header and starts our session if it has not been started
     include_once __DIR__ . "/include/header.php";
@@ -18,26 +18,29 @@
     $message = "";
     if (isPostRequest()) 
     {
-        //echo "made it";
+        echo "made it";
         // get _POST form fields
-        $username = filter_input(INPUT_POST, 'userName');
+        $username = filter_input(INPUT_POST, 'username');
         $password = filter_input(INPUT_POST, 'password');
-
+        echo "made it 5";
         // Set up configuration file and create database
         $configFile = __DIR__ . '/model/dbconfig.ini';
         try 
         {
             $userDatabase = new Users($configFile);
+            echo "made it 6";
         } 
         catch ( Exception $error ) 
         {
+            echo "made it 4";
             echo "<h2>" . $error->getMessage() . "</h2>";
         }   
     
+        
         // Now we can check to see if use credentials are valid.
-        if ($userDatabase->validateCredentials($username, $password)) 
+        if ($userDatabase->validateCredentials($username, $password))
         {
-            //echo "made it 2";
+            echo "made it 2";
             // If so, set logged in to TRUE
             $_SESSION['isLoggedIn'] = true;
             // Redirect to team listing page
@@ -45,7 +48,7 @@
         } 
         else 
         {
-            //echo "made it 3";
+            echo "made it 3";
            // Whoops! Incorrect login. Tell user and stay on this page.
            $message = "You did not enter the correct login credentials.";
         }
@@ -71,7 +74,7 @@
             </div>
             <div class="rowContainer">
                 <div class="col1">User Name:</div>
-                <div class="col2"><input type="text" name="userName" value="donald"></div> 
+                <div class="col2"><input type="text" name="username" value="donald"></div> 
             </div>
             <div class="rowContainer">
                 <div class="col1">Password:</div>

@@ -2,10 +2,10 @@
 
     // Load helper functions (which also starts the session) then check if user is logged in
     include_once __DIR__ . '/include/functions.php'; 
-    if (!isUserLoggedIn())
-    {
-        header ('Location: login.php');
-    }
+    //if (!isUserLoggedIn())
+    //{
+    //    header ('Location: login.php');
+    //}
 
    include_once __DIR__ . '/model/Search.php';
 
@@ -28,7 +28,6 @@
             $patientFirstName="";
             $patientLastName="";
             $patientMarried="";
-            $patientBirthDate="";
             if ($_POST["fieldName"] == "patientFirstName")
             {
                 $patientFirstName = $_POST['fieldValue'];
@@ -41,12 +40,9 @@
             {
                 $patientMarried = $_POST['fieldValue'];
             }
-            else if ($_POST["fieldName"] == "patientBirthDate")
-            {
-                $patientBirthDate = $_POST['fieldValue'];
-            }
-            //echo "Team: " . $teamName . "   Division: " . $divison;
-            $patientListing = $patientDatabase->searchPatients($patientFirstName, $patientLastName, $patientMarried, $patientBirthDate);
+
+            //echo "patientFirstName: " . $patientFirstName . "   patientLastName: " . $patientLastName . " patientMarried: " . $patientMarried . " patientBirthDate: " . $patientBirthDate;
+            $patientListing = $patientDatabase->searchPatients($patientFirstName, $patientLastName, $patientMarried);
         }
         else
         {
@@ -66,7 +62,7 @@
     // either the page form or a database query.
     // It sorts based on the associative array keys.
     $patientFirstName  = array_column($patientListing, 'patientFirstName');
-    $patientLastName = array_column($teamListing, 'patientLastName');
+    $patientLastName = array_column($patientListing, 'patientLastName');
     $patientMarried = array_column($patientListing, 'patientMarried');
     $patientBirthDate = array_column($patientListing, 'patientBirthDate');
 
@@ -85,12 +81,11 @@
               <option value="patientFirstName">First Name</option>
               <option value="patientLastName">Last Name</option>
               <option value="patientMarried">Marital Status</option>
-              <option value="patientBirthDate">Birth Date</option>
           </select>
        <input type="text" name="fieldValue" />
       <button type="submit" name="Search">Search</button>     
   </form>      
-  <div style="background-color: #fff0cc; padding: 10px;">
+  <!-- <div style="background-color: #fff0cc; padding: 10px;">
 
   <h2>Sort Patients [<em>not implemented</em>]</h2>
 <form  action="#" method="post">
@@ -109,7 +104,7 @@
        
       <button type="submit"  name="sortPatient">Sort</button>
 </form>  
-</div>
+</div> -->
     <div class="col-sm-offset-2 col-sm-10">
         <h1>Patients</h1>
         <br />
@@ -117,6 +112,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Marital Status</th>
