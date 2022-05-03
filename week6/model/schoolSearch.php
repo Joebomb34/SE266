@@ -1,87 +1,125 @@
 <?php
 
-include_once __DIR__ . '\model\schools.php';
-include_once __DIR__ . '\include\functions.php';
+    include_once __DIR__ . '\Schools.php';
+    include_once __DIR__ . '\..\include\functions.php';
 
-$schoolName = "";
-$city = "";
-$state = "";
-if (isPostRequest()){
-    
-}
-
-// Extending the patients class so we can take advantage of work done earlier
-class PatientSearch extends Patients
-{
-
-    // Allows user to search for either first name, last name, married, or birth date
-    // INPUT: first name, last name, or married to search for
-    function searchPatients ($patientFirstName, $patientLastName, $patientMarried) 
+    // Set up configuration file and create database
+    $configFile = __DIR__ . '\dbconfig.ini';
+    try 
     {
-        // Set up all the necessary variables here 
-        // to ensure they are scoped for the entire function
-        $results = array();             // tables of query results
-        $binds = array();               // bind array for query parameters
-        $patientTable = $this->getDatabaseRef();   // Alias for database PDO
+        $schoolDatabase = new Schools($configFile);
+    } 
+    catch ( Exception $error ) 
+    {
+        echo "<h2>" . $error->getMessage() . "</h2>";
+    } 
 
-        // Create base SQL statement that we can append
-        // specific restrictions to
-        $sqlQuery =  "SELECT * FROM  patients   ";
-$isFirstClause = true;
-        // If first name is set, append a patient query and bind parameter
-        if ($patientFirstName != "") {
-            if ($isFirstClause)
-            {
-                $sqlQuery .=  " WHERE ";
-                $isFirstClause = false;
-            }
-            else
-            {
-                $sqlQuery .= " AND ";
-            }
-            $sqlQuery .= "  patientFirstName LIKE :patientFirstName";
-            $binds['patientFirstName'] = '%'.$patientFirstName.'%';
-        }
-    
-        // If Last name is set, append the First name query and bind parameter
-        if ($patientLastName != "") {
-            if ($isFirstClause)
-            {
-                $sqlQuery .=  " WHERE ";
-                $isFirstClause = false;
-            }
-            else
-            {
-                $sqlQuery .= " AND ";
-            }
-            $sqlQuery .= "  patientLastName LIKE :patientLastName";
-            $binds['patientLastName'] = '%'.$patientLastName.'%';
-        }
-        //If Married is set, append the First name, last name query and bind parameter
-        if ($patientMarried != ""){
-            if ($isFirstClause){
-                $sqlQuery .= " WHERE ";
-                $isFirstClause = false;
-            }
-            else{
-                $sqlQuery .= " AND ";
-            }
-            $sqlQuery .= " patientMarried LIKE :patientMarried";
-            $binds['patientMarried'] = '%'.$patientMarried.'%';
-        }
-
-        // Create query object from the table
-        $stmt = $patientTable->prepare($sqlQuery);
-
-        // Perform query on the database
-        if ($stmt->execute($binds) && $stmt->rowCount() > 0) 
+    // If POST, delete the requested school before listing all schools
+    $schoolListing = [];
+    if (isPostRequest()) 
+    {
+        if (isset($_POST["Search"]))
         {
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-        
-        // Return query rows if any match the search
-        return $results;
-    } // end search
-}
+            $schoolName = "";
+            $city = "";
+            $state = "";
+            if ($_POST["fieldName"] == "schoolName")
+            {
+                $schoolName = $_POST['fieldValue'];
+            }
+            else if ($_POST["fieldName"] == "city")
+            {
+                $city = $_POST['fieldValue'];
+            }
+            else if ($_POST["fieldName"] == "state")
+            {
+                $state = $_POST['fieldValue'];
+            }
 
+            //echo "schoooName: " . $schoolName . "   city: " . $city . " state: " . $state;
+            $schoolListing = $schoolDatabase->getSelectedSchools($schoolName, $city, $state);
+        }
+        else
+        {
+        
+            $id = filter_input(INPUT_POST, 'id');
+            $schoolListing = $schoolDatabase->getSelectedSchools($schoolName, $city, $state);
+        }
+    }
+    else
+    {
+        $schoolListing = $schoolDatabase->getSelectedSchools($schoolName, $city, $state);
+    }
+
+        //*******************************************************************//
+        //************     TODO     *****************************************//
+        //
+        // Create an object to represent the schools table in the database 
+        //
+        //  Add your search logic here. 
+        // 
+        // Call getSchools with the appropriate arguments
+        //
+        //*******************************************************************//
+    
+
+    include_once __DIR__ . "/include/header.php";
 ?>
+
+    <h2>Search Schools</h2>
+    <form method="post" action="search.php">
+        <div class="rowContainer">
+            <div class="col1">School Name:</div>
+            <div class="col2"><input type="text" name="schoolName" value="<?php echo $schoolName; ?>"></div> 
+        </div>
+        <div class="rowContainer">
+            <div class="col1">City:</div>
+            <div class="col2"><input type="text" name="city" value="<?php echo $city; ?>"></div> 
+        </div>
+        <div class="rowContainer">
+            <div class="col1">State:</div>
+            <div class="col2"><input type="text" name="state" value="<?php echo $state; ?>"></div> 
+        </div>
+            <div class="rowContainer">
+            <div class="col1">&nbsp;</div>
+            <div class="col2"><input type="submit" name="search" value="Search" class="btn btn-warning"></div> 
+        </div>
+    </form>
+            
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>School Name</th>
+                <th>City</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+      
+        <?php foreach ($schoolListing as $row): ?>
+            <tr>
+                <td>
+                    <form action="schoolSearch.php" method="post">
+                        <input type="hidden" name="id" value="<?= $row['id']; ?>" />
+                        <button class="btn glyphicon glyphicon-trash" type="submit"></button>
+                    </form>   
+                </td>
+                <td><?php echo $row['schoolName']; ?></td>
+                <td><?php echo $row['city']; ?></td>
+                <td><?php echo $row['state']; ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+       
+    </div>
+    </div>
+</body>
+</html>
+
+
+    <?php
+
+        include_once __DIR__ . '\..\include\footer.php';
+    ?>

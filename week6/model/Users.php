@@ -163,6 +163,11 @@ class Users
         // If we successfully execute and return a row, the crednetials are valid
         return $isValidUser;
     }
+
+    public function __destruct()
+    {
+        $this->userData = null;
+    }
  
 } // end class users
 ?>

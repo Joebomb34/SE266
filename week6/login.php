@@ -44,7 +44,7 @@
             // If so, set logged in to TRUE
             $_SESSION['isLoggedIn'] = true;
             // Redirect to team listing page
-            header ('Location: patientListing.php');
+            header ('Location: schoolUpload.php');
         } 
         else 
         {
