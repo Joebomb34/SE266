@@ -1,10 +1,12 @@
 <?php
 
-    include_once __DIR__ . '\Schools.php';
-    include_once __DIR__ . '\..\include\functions.php';
+
+    //including schools that houses functions and functions for more widely used functions
+    include_once __DIR__ . '\model\Schools.php';
+    include_once __DIR__ . '\include\functions.php';
 
     // Set up configuration file and create database
-    $configFile = __DIR__ . '\dbconfig.ini';
+    $configFile = __DIR__ . '\model\dbconfig.ini';
     try 
     {
         $schoolDatabase = new Schools($configFile);
@@ -14,15 +16,19 @@
         echo "<h2>" . $error->getMessage() . "</h2>";
     } 
 
+    //adding schoolListing as an array to store the schools into a table
     // If POST, delete the requested school before listing all schools
     $schoolListing = [];
     if (isPostRequest()) 
     {
+
+        //if were searching than we are going to look at the names as defined in the form and place then in the correct columns
         if (isset($_POST["Search"]))
         {
             $schoolName = "";
             $city = "";
             $state = "";
+            
             if ($_POST["fieldName"] == "schoolName")
             {
                 $schoolName = $_POST['fieldValue'];
@@ -43,6 +49,7 @@
         {
         
             $id = filter_input(INPUT_POST, 'id');
+            //$schoolDatabase->deleteALLSchools($id);
             $schoolListing = $schoolDatabase->getSelectedSchools($schoolName, $city, $state);
         }
     }
@@ -63,7 +70,7 @@
         //*******************************************************************//
     
 
-    include_once __DIR__ . "/include/header.php";
+    include_once __DIR__ . '\include\header.php';
 ?>
 
     <h2>Search Schools</h2>
@@ -121,5 +128,5 @@
 
     <?php
 
-        include_once __DIR__ . '\..\include\footer.php';
+        include_once __DIR__ . '\include\footer.php';
     ?>
