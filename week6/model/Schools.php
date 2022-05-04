@@ -1,5 +1,7 @@
 <?php
 
+//*****************************************************
+//
 // This class provides a wrapper for the database 
 // All methods work on the schools table
 
@@ -12,15 +14,16 @@ class Schools
     // Maximum number of records to insert into database for testing
     const MAX_INSERT_ROWS = 1000;
     
+    //*****************************************************
     // Users class constructor:
     // Instantiates a PDO object based on given URL and
     // uses that to initialize the data field $userData
     //
     // INPUT: URL of database configuration file
     // Throws exception if database access fails
-    // This constructor is very generic and can be used to 
-    // Access your course database for any assignment
-    // The methods need to be changed to hit the correct table(s)
+    // ** This constructor is very generic and can be used to 
+    // ** access your course database for any assignment
+    // ** The methods need to be changed to hit the correct table(s)
     public function __construct($configFile) 
     {
         // Parse config file, throw exception if it fails
@@ -51,14 +54,15 @@ class Schools
     } // end constructor
 
 
+    //*****************************************************
     // Load schools into database table "schools" from a CSV file
     // INPUT: Name of CSV file to load schools from
-    // Field order: School Name, City, State Abbreviation
+    //       Field order: School Name, City, State Abbreviation
     // RETURNS: True if file opened and schools inserted into table
-    // False otherwise
-    public function insertSchoolsFromFile ($fileName) 
+    //               False otherwise
+    public function insertSchoolsFromFile($fileName) 
     {
-        $insertSucessful = false;   // File records are not added at this point
+        $insertSucessful = false;           // file records are not added at this point
         $schoolTable = $this->schoolData;   // Alias for database PDO
         $schoolCounter = 0;                 // Counter for rows read from file
        
@@ -71,7 +75,7 @@ class Schools
             // Open file 
             $schoolFileRef = fopen($fileName, 'rb');
 
-            // Ignore first line (CSV header row) by loading and not using it
+            // ignore first line (CSV header row) by loading and not using it
             $row = fgetcsv($schoolFileRef);
 
             $schoolCounter = 0;
@@ -113,25 +117,27 @@ class Schools
 //  4) Execute statement and check for returned rows
 //  5) Return results if needed.
 
-    // Delete all teams from table
+    //*****************************************************
+    // Delete all schools from table
     // RETURNS: True if delete is successful, false otherwise
     public function deleteAllSchools() 
     {
-            $deleteSucessful = false;   // Team not updated at this point
+            $deleteSucessful = false;           // Team not updated at this point
             $schoolTable = $this->schoolData;   // Alias for database PDO
 
             // Preparing SQL query    
-            $stmt = $schoolTable->query("DELETE FROM schools;");
+            $deleteSucessful = $schoolTable->query("DELETE FROM schools;");
 
             // Execute query and check to see if rows were returned 
             // If so, the schools were successfully deleted      
-            $deleteSucessful = ($stmt->execute() && $stmt->rowCount() > 0);
+           // $deleteSucessful = ($stmt->execute() && $stmt->rowCount() > 0);
 
             // Return status to client           
             return $deleteSucessful;
     }
    
-    // Get a count of schools int he database
+    //*****************************************************
+    // Get a count of schools in the database
     // RETURNS: how many schools were uploaded were uploaded to DB
    public function getSchoolCount() 
    {
@@ -148,6 +154,7 @@ class Schools
    } // end getSchoolCount
 
 
+     //*****************************************************
     // Allows user to search for either a school name, city, state or any combination
     // INPUT: school name, host city and state to search for
     // RETURNS: table of records of schools matching the criteria
@@ -225,5 +232,23 @@ class Schools
         // Return the results
         return $results;
    }    // end getSelected Schools
+
+   // Destructor to clean up any memory allocation
+   public function __destruct() 
+   {
+       // Mark the PDO for deletion
+       $this->schoolData = null;
+
+        // If we had a datafield that was a fileReference
+        // we should ensure the file is closed
+        // We don't have that here since schoolFileRef was local to 
+        // the method insertSchoolsFromFile   
+        // if($this->myFileRef)
+        // {
+        //     fclose($this->myFileRef);
+        // }
+
+   }
+
 
 } // end Schools class

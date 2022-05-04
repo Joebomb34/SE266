@@ -18,10 +18,10 @@
 
     //adding schoolListing as an array to store the schools into a table
     // If POST, delete the requested school before listing all schools
-    $schoolListing = [];
+    
     if (isPostRequest()) 
     {
-
+        $schoolListing = [];
         //if were searching than we are going to look at the names as defined in the form and place then in the correct columns
         if (isset($_POST["Search"]))
         {
@@ -49,7 +49,7 @@
         {
         
             $id = filter_input(INPUT_POST, 'id');
-            //$schoolDatabase->deleteALLSchools($id);
+            $schoolDatabase->deleteAllSchools($id);
             $schoolListing = $schoolDatabase->getSelectedSchools($schoolName, $city, $state);
         }
     }
@@ -74,7 +74,7 @@
 ?>
 
     <h2>Search Schools</h2>
-    <form method="post" action="search.php">
+    <form method="post" action="schoolSearch.php">
         <div class="rowContainer">
             <div class="col1">School Name:</div>
             <div class="col2"><input type="text" name="schoolName" value="<?php echo $schoolName; ?>"></div> 
@@ -110,11 +110,11 @@
                     <form action="schoolSearch.php" method="post">
                         <input type="hidden" name="id" value="<?= $row['id']; ?>" />
                         <button class="btn glyphicon glyphicon-trash" type="submit"></button>
-                    </form>   
+                    </form>
                 </td>
                 <td><?php echo $row['schoolName']; ?></td>
                 <td><?php echo $row['city']; ?></td>
-                <td><?php echo $row['state']; ?></td>
+                <td><?php echo $row['state']; ?></td> 
             </tr>
         <?php endforeach; ?>
         </tbody>
@@ -126,7 +126,7 @@
 </html>
 
 
-    <?php
+<?php
 
-        include_once __DIR__ . '\include\footer.php';
-    ?>
+    include_once __DIR__ . '\include\footer.php';
+?>

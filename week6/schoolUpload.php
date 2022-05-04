@@ -1,6 +1,21 @@
 <?php
+
+
+
    include_once __DIR__ . '\model\Schools.php';
+
    include_once __DIR__ . '\include\functions.php';
+
+   // Set up configuration file and create database
+    $configFile = __DIR__ . '\model\dbconfig.ini';
+    try 
+    {
+        $schoolDatabase = new Schools($configFile);
+    } 
+    catch ( Exception $error ) 
+    {
+        echo "<h2>" . $error->getMessage() . "</h2>";
+    } 
 
     if (!isUserLoggedIn())
     {
@@ -15,17 +30,19 @@
 
         $path = getcwd() . DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
 
-        //concatinating the filename that was uploaded to out path
-        $targetFilename = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
-
         //grab the file name of the file that was stored on the server
         $tmpName = $_FILES['fileToUpload']['tmp_name'];
 
-        //moveing the uploaded file to the place i will access it from
-        move_uploaded_file($tmp_name, $targetFilename);
+        //concatinating the filename that was uploaded to out path
+        $targetFilename = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
+
+        //moving the uploaded file to the place i will access it from
+        move_uploaded_file($tmpName, $targetFilename);
+
+        insertSchoolsFromFile($tmpName, $targetFilename);
 
         //redirect to schoolSearch.php
-        header ('Location: schoolSearch.php');
+        
 
         //*******************************************************************//
         //************     TODO     *****************************************//
@@ -59,6 +76,8 @@
     //  If $_FILES['fileToUpload'] is set, we were successful in uploading the file
 if (isset ($_FILES['fileToUpload'])) {
     echo "<h2>File successfully uploaded! 😀</h2>";
+
+    header ('Location: schoolSearch.php');
 }
 ?>
 
