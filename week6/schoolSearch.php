@@ -8,6 +8,7 @@
 
     // Set up configuration file and create database
     $configFile = __DIR__ . '\model\dbconfig.ini';
+
     try 
     {
         $schoolDatabase = new Schools($configFile);
@@ -48,7 +49,6 @@
                 $state = $_POST['fieldValue'];
             }
 
-            //echo "schoooName: " . $schoolName . "   city: " . $city . " state: " . $state;
             $schoolListing = $schoolDatabase->getSelectedSchools($schoolName, $city, $state);
         }
         else
@@ -83,7 +83,7 @@
     <form method="post" action="schoolSearch.php">
         <div class="rowContainer">
             <div class="col1">School Name:</div>
-            <div class="col2"><input type="text" name="schoolName" value="<?php echo $schoolName; ?>"></div> 
+            <div class="col2"><input type="text" name="schoolName" value="<?php echo $schoolName;?>"></div> 
         </div>
         <div class="rowContainer">
             <div class="col1">City:</div>
@@ -110,24 +110,21 @@
         </thead>
         <tbody>
       
-        <?php foreach ($schoolListing as $row): ?>
-            <tr>
-                <td>
-                    <form action="schoolSearch.php" method="post">
-                        <input type="hidden" name="id" value="<?= $row['id']; ?>" />
-                        <button class="btn glyphicon glyphicon-trash" type="submit"></button>
-                    </form>
-                </td>
-                <td><?php echo $row['schoolName']; ?></td>
-                <td><?php echo $row['city']; ?></td>
-                <td><?php echo $row['state']; ?></td> 
-            </tr>
-        <?php endforeach; ?>
+            <?php foreach ($schoolListing as $row): ?>
+                <tr>
+                    <td>
+                        <form action="schoolSearch.php" method="post">
+                            <input type="hidden" name="id" value="<?= $row['id']; ?>" />
+                            <button class="btn glyphicon glyphicon-trash" type="submit"></button>
+                        </form>
+                    </td>
+                    <td><?php echo $row['schoolName']; ?></td>
+                    <td><?php echo $row['city']; ?></td>
+                    <td><?php echo $row['state']; ?></td> 
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
-       
-    </div>
-    </div>
 </body>
 </html>
 

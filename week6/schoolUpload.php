@@ -39,21 +39,7 @@
         //moving the uploaded file to the place i will access it from
         move_uploaded_file($tmpName, $targetFilename);
         
-        $schoolListing = $schoolDatabase->insertSchoolsFromFile($file);
-
-
-        //redirect to schoolSearch.php
-        
-
-        //*******************************************************************//
-        //************     TODO     *****************************************//
-        // 
-        // upload the file to "upload" directory and then call insertSchoolsFromFile 
-        //      *** Make sure that the upload directory is writeable!
-        //
-        // redirect to search.php
-        //
-        //*******************************************************************//
+        $schoolFile = $schoolDatabase->insertSchoolsFromFile($file);
 
     }
 
