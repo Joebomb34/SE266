@@ -1,10 +1,8 @@
 <?php
 
+    include_once __DIR__ . '\model\Schools.php';
 
-
-   include_once __DIR__ . '\model\Schools.php';
-
-   include_once __DIR__ . '\include\functions.php';
+    include_once __DIR__ . '\include\functions.php';
 
    // Set up configuration file and create database
     $configFile = __DIR__ . '\model\dbconfig.ini';
@@ -22,6 +20,7 @@
         header ('Location: login.php');
     }
 
+   
     //define the upload directory
     define("UPLOAD_DIRECTORY", "upload");
 
@@ -29,17 +28,19 @@
     {
 
         $path = getcwd() . DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
-
+        
+        
         //grab the file name of the file that was stored on the server
         $tmpName = $_FILES['fileToUpload']['tmp_name'];
-
+        
         //concatinating the filename that was uploaded to out path
         $targetFilename = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
 
         //moving the uploaded file to the place i will access it from
         move_uploaded_file($tmpName, $targetFilename);
+        
+        $schoolListing = $schoolDatabase->insertSchoolsFromFile($file);
 
-        insertSchoolsFromFile($tmpName, $targetFilename);
 
         //redirect to schoolSearch.php
         

@@ -1,5 +1,6 @@
 <?php
 
+   
 
     //including schools that houses functions and functions for more widely used functions
     include_once __DIR__ . '\model\Schools.php';
@@ -15,6 +16,11 @@
     {
         echo "<h2>" . $error->getMessage() . "</h2>";
     } 
+
+    if (!isUserLoggedIn())
+    {
+        header ('Location: login.php');
+    }
 
     //adding schoolListing as an array to store the schools into a table
     // If POST, delete the requested school before listing all schools
