@@ -39,7 +39,7 @@
         //moving the uploaded file to the place i will access it from
         move_uploaded_file($tmpName, $targetFilename);
         
-        $schoolFile = $schoolDatabase->insertSchoolsFromFile($file);
+        $schoolFile = $schoolDatabase->insertSchoolsFromFile($targetFilename);
 
     }
 

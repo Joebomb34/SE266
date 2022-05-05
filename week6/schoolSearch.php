@@ -28,10 +28,12 @@
     
     if (isPostRequest()) 
     {
+        echo 'post request';
         $schoolListing = [];
         //if were searching than we are going to look at the names as defined in the form and place then in the correct columns
-        if (isset($_POST["Search"]))
+        if (isset($_POST["search"]))
         {
+            echo 'ur gay'; //ur not getting here dude
             $schoolName = "";
             $city = "";
             $state = "";
@@ -83,22 +85,22 @@
     <form method="post" action="schoolSearch.php">
         <div class="rowContainer">
             <div class="col1">School Name:</div>
-            <div class="col2"><input type="text" name="schoolName" value="<?php echo $schoolName;?>"></div> 
+            <div class="col2"><input type="text" name="schoolName" value=""></div> 
         </div>
         <div class="rowContainer">
             <div class="col1">City:</div>
-            <div class="col2"><input type="text" name="city" value="<?php echo $city; ?>"></div> 
+            <div class="col2"><input type="text" name="city" value=""></div> 
         </div>
         <div class="rowContainer">
             <div class="col1">State:</div>
-            <div class="col2"><input type="text" name="state" value="<?php echo $state; ?>"></div> 
+            <div class="col2"><input type="text" name="state" value=""></div> 
         </div>
             <div class="rowContainer">
             <div class="col1">&nbsp;</div>
             <div class="col2"><input type="submit" name="search" value="Search" class="btn btn-warning"></div> 
         </div>
     </form>
-            
+
 
     <table class="table table-striped">
         <thead>
@@ -112,15 +114,9 @@
       
             <?php foreach ($schoolListing as $row): ?>
                 <tr>
-                    <td>
-                        <form action="schoolSearch.php" method="post">
-                            <input type="hidden" name="id" value="<?= $row['id']; ?>" />
-                            <button class="btn glyphicon glyphicon-trash" type="submit"></button>
-                        </form>
-                    </td>
                     <td><?php echo $row['schoolName']; ?></td>
-                    <td><?php echo $row['city']; ?></td>
-                    <td><?php echo $row['state']; ?></td> 
+                    <td><?php echo $row['schoolCity']; ?></td>
+                    <td><?php echo $row['schoolState']; ?></td> 
                 </tr>
             <?php endforeach; ?>
         </tbody>
