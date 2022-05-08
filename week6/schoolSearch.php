@@ -33,20 +33,21 @@
         //if were searching than we are going to look at the names as defined in the form and place then in the correct columns
         if (isset($_POST["search"]))
         {
-            echo 'ur gay'; //ur not getting here dude
+            echo 'here';
             $schoolName = "";
             $city = "";
             $state = "";
             
             if ($_POST["fieldName"] == "schoolName")
             {
+                echo 'here2';
                 $schoolName = $_POST['fieldValue'];
             }
-            else if ($_POST["fieldName"] == "city")
+            elseif ($_POST["fieldName"] == "city")
             {
                 $city = $_POST['fieldValue'];
             }
-            else if ($_POST["fieldName"] == "state")
+            elseif ($_POST["fieldName"] == "state")
             {
                 $state = $_POST['fieldValue'];
             }
@@ -85,15 +86,15 @@
     <form method="post" action="schoolSearch.php">
         <div class="rowContainer">
             <div class="col1">School Name:</div>
-            <div class="col2"><input type="text" name="schoolName" value=""></div> 
+            <div class="col2"><input type="text" name="schoolName" value="<?php echo $schoolName; ?>"></div> 
         </div>
         <div class="rowContainer">
             <div class="col1">City:</div>
-            <div class="col2"><input type="text" name="city" value=""></div> 
+            <div class="col2"><input type="text" name="city" value="<?php echo $city; ?>"></div> 
         </div>
         <div class="rowContainer">
             <div class="col1">State:</div>
-            <div class="col2"><input type="text" name="state" value=""></div> 
+            <div class="col2"><input type="text" name="state" value="<?php echo $state; ?>"></div> 
         </div>
             <div class="rowContainer">
             <div class="col1">&nbsp;</div>
@@ -103,8 +104,10 @@
 
 
     <table class="table table-striped">
+        <?php $schoolCount = $schoolDatabase->getSchoolCount();?>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>School Name</th>
                 <th>City</th>
                 <th>State</th>
@@ -114,6 +117,7 @@
       
             <?php foreach ($schoolListing as $row): ?>
                 <tr>
+                    <td><?php echo $row['id']; ?></td>
                     <td><?php echo $row['schoolName']; ?></td>
                     <td><?php echo $row['schoolCity']; ?></td>
                     <td><?php echo $row['schoolState']; ?></td> 
