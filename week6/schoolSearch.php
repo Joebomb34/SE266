@@ -25,31 +25,32 @@
 
     //adding schoolListing as an array to store the schools into a table
     // If POST, delete the requested school before listing all schools
-    
+    $schoolName = "";
+    $city = "";
+    $state = "";
     if (isPostRequest()) 
     {
-        echo 'post request';
+        //echo 'post request';
         $schoolListing = [];
         //if were searching than we are going to look at the names as defined in the form and place then in the correct columns
+
         if (isset($_POST["search"]))
         {
-            echo 'here';
-            $schoolName = "";
-            $city = "";
-            $state = "";
+            //echo 'here';
             
-            if ($_POST["fieldName"] == "schoolName")
+            
+            if ($_POST["schoolName"])
             {
-                echo 'here2';
-                $schoolName = $_POST['fieldValue'];
+                //echo 'here2';
+                $schoolName = $_POST['schoolName'];
             }
-            elseif ($_POST["fieldName"] == "city")
+            elseif ($_POST["city"])
             {
-                $city = $_POST['fieldValue'];
+                $city = $_POST['city'];
             }
-            elseif ($_POST["fieldName"] == "state")
+            elseif ($_POST["state"])
             {
-                $state = $_POST['fieldValue'];
+                $state = $_POST['state'];
             }
 
             $schoolListing = $schoolDatabase->getSelectedSchools($schoolName, $city, $state);
@@ -104,7 +105,6 @@
 
 
     <table class="table table-striped">
-        <?php $schoolCount = $schoolDatabase->getSchoolCount();?>
         <thead>
             <tr>
                 <th>ID</th>
