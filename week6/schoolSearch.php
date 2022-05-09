@@ -25,6 +25,7 @@
 
     //adding schoolListing as an array to store the schools into a table
     // If POST, delete the requested school before listing all schools
+    //variable names go before the isPostRequest so that the html can use it below and access those variables
     $schoolName = "";
     $city = "";
     $state = "";
@@ -38,7 +39,7 @@
         {
             //echo 'here';
             
-            
+            //on the post schoolName, city, state search the database and retrun the schools fitting the parameters
             if ($_POST["schoolName"])
             {
                 //echo 'here2';
