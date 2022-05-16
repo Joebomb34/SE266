@@ -45,12 +45,11 @@
             <input type="button" class="btn btn-success button-size" data-character-id="2" onClick="makeRequest(this)" value="Vote for Mickey Mouse"/>
             </div>
          </div>
-
+                    
          <div id="results" class="results">
             <h2>Voting Results</h2>
 
         </div>
-
         <script>
             // An async function pauses and waits for the AJAX call return
             async function makeRequest(caller) 
@@ -78,6 +77,7 @@
                     let jsonResponse = await response.json();
                     //alert('here2');
                     JSON.parse[jsonResponse];
+                    //JSON.parse[$voteReturn];
                     // Assign the response into a DOM object for display
                     document.getElementById("results").innerHTML = jsonResponse;
 

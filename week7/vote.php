@@ -17,19 +17,21 @@ if ($contentType === "application/json")
   $disneyTable = new DisneyVotes($configFile);
 
   $voteReturn = $disneyTable->insertDisneyVote($decoded["DisneyCharacterID"]);
-
+  
   echo json_encode($voteReturn);
 
+  
+
   //If json_decode failed, the JSON is invalid.
-  //if( is_array($decoded)) 
-  //{
-      // Display User Name from JSON file
-  //    echo json_encode($voteReturn);
+//   if( is_array($decoded)) 
+//   {
+//       //Display User Name from JSON file
+//      echo json_encode($voteReturn);
       
- // } else 
- // {
- //   echo "<h2>Invalid JSON File sent!</h2>";
- // }
+//  } else 
+//  {
+//    echo "<h2>Invalid JSON File sent!</h2>";
+//  }
 }
 
 ?>
