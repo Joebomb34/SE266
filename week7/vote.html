@@ -22,36 +22,73 @@
     <body>
 
     <div class="main"><h1>Vote for your favorite Disney Character</h1>
-                <div class="character">
+            <div class="character">
             <h3>Donald Duck</h3>
             <img src="./images/donald.png ">
             <div class="button-div">
-            <input type="button" class="btn btn-success button-size" data-character-id="1" value="Vote for Donald Duck">
+            <input type="button" class="btn btn-success button-size" data-character-id="1" onClick="makeRequest(this)" value="Vote for Donald Duck"/>
             </div>
          </div>
         
-                <div class="character">
+            <div class="character">
             <h3>Goofy</h3>
             <img src="./images/goofy.png ">
             <div class="button-div">
-            <input type="button" class="btn btn-success button-size" data-character-id="3" value="Vote for Goofy">
+            <input type="button" class="btn btn-success button-size" data-character-id="3" onClick="makeRequest(this)" value="Vote for Goofy"/>
             </div>
          </div>
         
-                <div class="character">
+            <div class="character">
             <h3>Mickey Mouse</h3>
             <img src="./images/mickey.png ">
             <div class="button-div">
-            <input type="button" class="btn btn-success button-size" data-character-id="2" value="Vote for Mickey Mouse">
+            <input type="button" class="btn btn-success button-size" data-character-id="2" onClick="makeRequest(this)" value="Vote for Mickey Mouse"/>
             </div>
          </div>
 
-         <div class="results">
+         <div id="results" class="results">
             <h2>Voting Results</h2>
+
         </div>
 
         <script>
+            // An async function pauses and waits for the AJAX call return
+            async function makeRequest(caller) 
+            {
+                //alert("here");
+                // The URL of the PHP router function  
+                let ajaxURL = 'vote.php';
+                //document.getElementById("results").innerHTML = caller.dataset.characterId;
+                // JSON to pass we will pass to router
+                let ajaxJSONdata = { DisneyCharacterID: caller.dataset.characterId };
+                //alert(JSON.stringify(ajaxJSONdata));
+                // Use POST to fetch the URL and wait for a response
+                try {
+                    let response = await fetch(ajaxURL, 
+                                        {
+                                            method: 'POST', 
+                                            body: JSON.stringify(ajaxJSONdata), 
+                                            headers: 
+                                            {
+                                                'Content-Type': 'application/json'
+                                            }
+                                        }); // end fetch URL w/POST
+
+                    // Parse the response into a JSON array        
+                    let jsonResponse = await response.json();
+                    //alert('here2');
+                    JSON.parse[jsonResponse];
+                    // Assign the response into a DOM object for display
+                    document.getElementById("results").innerHTML = jsonResponse;
+
+                    // Display in console for error checking
+                    console.log(json);
             
+                } catch (error) {
+                    console.error();
+                }
+        
+            }
         </script>
 
 </body>
