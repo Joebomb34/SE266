@@ -79,7 +79,7 @@ class DisneyVotes
             array_push($results[1], $v['VoteCount']);
         } 
        
-        return (json_encode($results));
+        return $results;
     }
     
    
