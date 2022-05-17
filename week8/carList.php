@@ -13,74 +13,73 @@
     $configFile = __DIR__ . '/model/dbconfig.ini';
     try 
     {
-        $patientDatabase = new PatientSearch($configFile);
+        $carDatabase = new CarSearch($configFile);
     } 
     catch ( Exception $error ) 
     {
         echo "<h2>" . $error->getMessage() . "</h2>";
     }   
     // If POST, delete the requested team before listing all teams
-    $patientListing = [];
+    $carList = [];
     if (isPostRequest()) 
     {
         if (isset($_POST["Search"]))
         {
-            $patientFirstName="";
-            $patientLastName="";
-            $patientMarried="";
-            if ($_POST["fieldName"] == "patientFirstName")
+            $carMake="";
+            $carModel="";
+            $carPurchase="";
+            if ($_POST["fieldName"] == "carMake")
             {
-                $patientFirstName = $_POST['fieldValue'];
+                $carMake = $_POST['fieldValue'];
             }
-            else if ($_POST["fieldName"] == "patientLastName")
+            else if ($_POST["fieldName"] == "carModel")
             {
-                $patientLastName = $_POST['fieldValue'];
+                $carModel = $_POST['fieldValue'];
             }
-            else if ($_POST["fieldName"] == "patientMarried")
+            else if ($_POST["fieldName"] == "carPurchase")
             {
-                $patientMarried = $_POST['fieldValue'];
+                $carPurchase = $_POST['fieldValue'];
             }
 
             //echo "patientFirstName: " . $patientFirstName . "   patientLastName: " . $patientLastName . " patientMarried: " . $patientMarried . " patientBirthDate: " . $patientBirthDate;
-            $patientListing = $patientDatabase->searchPatients($patientFirstName, $patientLastName, $patientMarried);
+            $carList = $carDatabase->searchCars($carMake, $carModel, $carPurchase);
         }
         else
         {
         
-            $id = filter_input(INPUT_POST, 'patientId');
-            $patientDatabase->deletePatient ($id);
-            $patientListing = $patientDatabase->getPatients();
+            $id = filter_input(INPUT_POST, 'carId');
+            $carDatabase->deleteCar ($id);
+            $carList = $carDatabase->getCars();
         }
     }
     else
     {
-        $patientListing = $patientDatabase->getPatients();
+        $carList = $carDatabase->getCars();
     }
 
 
     // This is a quick sorting hack that does not use
     // either the page form or a database query.
     // It sorts based on the associative array keys.
-    $patientFirstName  = array_column($patientListing, 'patientFirstName');
-    $patientLastName = array_column($patientListing, 'patientLastName');
-    $patientMarried = array_column($patientListing, 'patientMarried');
-    $patientBirthDate = array_column($patientListing, 'patientBirthDate');
+    $carMake  = array_column($carList, 'carMake');
+    $carModel = array_column($carList, 'carModel');
+    $carPurchase = array_column($carList, 'carPurchase');
 
-    array_multisort($patientLastName, SORT_ASC, $patientLastName, SORT_ASC, $patientListing);
+    array_multisort($carMake, SORT_ASC, $carMake, SORT_ASC, $carList);
 
 // Preliminaries are done, load HTML page header
     include_once __DIR__ . "/include/header.php";
 
 ?>
-    <h2>Search for a Patient</h2>
+    <h2>Search Cars</h2>
   <form action="#" method="post">
       <input type="hidden" name="action" value="search" />
       <label>Search by Field:</label>
        <select name="fieldName">
               <option value="">Select One</option>
-              <option value="patientFirstName">First Name</option>
-              <option value="patientLastName">Last Name</option>
-              <option value="patientMarried">Marital Status</option>
+              <option value="carMake">Car Make</option>
+              <option value="carModel">Car Model</option>
+              <option value="carPurchase">Purchase Date</option>
           </select>
        <input type="text" name="fieldValue" />
       <button type="submit" name="Search">Search</button>     
@@ -108,34 +107,32 @@
     <div class="col-sm-offset-2 col-sm-10">
         <h1>Patients</h1>
         <br />
-        <a href="updatePatient.php?action=Add">Add New Patient</a>      
+        <a href="update.php?action=Add">Add New Patient</a>      
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Marital Status</th>
-                <th>Birth Date</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Purchase Date</th>
                 <th>Update</th>
             </tr>
         </thead>
         <tbody>
       
-        <?php foreach ($patientListing as $row): ?>
+        <?php foreach ($carList as $row): ?>
             <tr>
                 <td>
-                    <form action="patientListing.php" method="post">
-                        <input type="hidden" name="patientId" value="<?= $row['id']; ?>" />
+                    <form action="carList.php" method="post">
+                        <input type="hidden" name="carId" value="<?= $row['id']; ?>" />
                         <button class="btn glyphicon glyphicon-trash" type="submit"></button>
                         <?php echo $row['id']; ?>
                     </form>   
                 </td>
-                <td><?php echo $row['patientFirstName']; ?></td>
-                <td><?php echo $row['patientLastName']; ?></td>
-                <td><?php echo $row['patientMarried']; ?></td>
-                <td><?php echo $row['patientBirthDate']; ?></td>
-                <td><a href="updatePatient.php?action=Update&patientId=<?= $row['id'] ?>">Update</a></td> 
+                <td><?php echo $row['carMake']; ?></td>
+                <td><?php echo $row['carModel']; ?></td>
+                <td><?php echo $row['carPurchase']; ?></td>
+                <td><a href="update.php?action=Update&carId=<?= $row['id'] ?>">Update</a></td> 
                 
             </tr>
         <?php endforeach; ?>

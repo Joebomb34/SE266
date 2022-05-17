@@ -57,7 +57,7 @@
 ?>
 
 <div class="container">
-    <h2>Patient Records</h2>
+    <h2>Cars</h2>
     <?php 
         if ($message)
         {   ?>

@@ -1,13 +1,13 @@
 <?php
     
-    include_once __DIR__ . '/model/patients.php';
+    include_once __DIR__ . '/model/cars.php';
     include_once __DIR__ . '/include/functions.php';
 
     // Set up configuration file and create database
     $configFile = __DIR__ . '/model/dbconfig.ini';
     try 
     {
-        $patientDatabase = new Patients($configFile);
+        $carDatabase = new Cars($configFile);
     } 
     catch ( Exception $error ) 
     {
@@ -15,11 +15,11 @@
     }   
     // If POST, delete the requested team before listing all teams
     if (isPostRequest()) {
-        $id = filter_input(INPUT_POST, 'patientId');
-        $patientDatabase->deletePatient ($id);
+        $id = filter_input(INPUT_POST, 'carId');
+        $carDatabase->deleteCar ($id);
 
     }
-    $patientListing = $patientDatabase->getPatients();
+    $carList = $carDatabase->getCars();
     
 ?>
 
