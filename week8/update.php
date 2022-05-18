@@ -23,15 +23,21 @@
       if ($action == "Update") 
       {
           $row = $carData->getCar($id);
+          $carYear = $row['carYear'];
           $carMake = $row['carMake'];
           $carModel = $row['carModel'];
+          $carTrans = $row['carTrans'];
+          $carColor = $row['carColor'];
           $carPurchase = $row['carPurchase'];
       } 
       //else it is Add and the user will enter patient info
       else 
       {
+          $carYear = "";
           $carMake = "";
           $carModel = "";
+          $carTrans = "";
+          $carColor = "";
           $carPurchase = "";
       }
   } // end if GET
@@ -42,20 +48,23 @@
   {
       $action = filter_input(INPUT_POST, 'action');
       $id = filter_input(INPUT_POST, 'carId');
+      $carYear = filter_input(INPUT_POST, 'carYear');
       $carMake = filter_input(INPUT_POST, 'carMake');
       $carModel = filter_input(INPUT_POST, 'carModel');
+      $carTrans = filter_input(INPUT_POST, 'carTrans');
+      $carColor = filter_input(INPUT_POST, 'carColor');
       $carPurchase = filter_input(INPUT_POST, 'carPurchase');
 
       if ($action == "Add") 
       {
-          $result = $carData->addCar ($carMake, $carModel, $carPurchase);
+          $result = $carData->addCar ($carYear, $carMake, $carModel, $carTrans, $carColor, $carPurchase);
       } 
       elseif ($action == "Update") 
       {
-          $result = $carData->updateCar ($id, $carMake, $carModel, $carPurchase);
+          $result = $carData->updateCar ($id, $carYear, $carMake, $carModel, $carTrans, $carColor, $carPurchase);
       }
 
-      // Redirect to patient listing on view.php
+      // Redirect to view page
       header('Location: view.php');
   } // end if POST
 
@@ -92,9 +101,17 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="carId">ID:</label>
       <div class="col-sm-10">
-        <input type=" " value="<?= $id; ?>">
+        <?= $id; ?>
         </div>
       </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="carYear">Year:</label>
+      <div class="col-sm-10">          
+        <input type="number" class="form-control" id="carYear" placeholder="Enter Year YYYY" name="carYear" value="<?= $carYear; ?>">
+      </div>
+    </div>
+
     <div class="form-group">
       <label class="control-label col-sm-2" for="carMake">Make:</label>
       <div class="col-sm-10">
@@ -106,6 +123,20 @@
       <label class="control-label col-sm-2" for="carModel">Model:</label>
       <div class="col-sm-10">          
         <input type="text" class="form-control" id="carModel" placeholder="Enter Model" name="carModel" value="<?= $carModel; ?>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="carTrans">Transmission:</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control" id="carTrans" placeholder="Enter Transmission" name="carTrans" value="<?= $carTrans; ?>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="carColor">Color:</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control" id="carColor" placeholder="Enter Color" name="carColor" value="<?= $carColor; ?>">
       </div>
     </div>
 
@@ -134,6 +165,7 @@
   </form>
   
   <div class="col-sm-offset-2 col-sm-10"><a href="./view.php">View Cars</a></div>
+  <div class="col-sm-offset-2 col-sm-10"><a href="./carList.php">Search Cars</a></div>
 </div>
 </div>
 

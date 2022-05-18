@@ -73,7 +73,7 @@ class DisneyVotes
        $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
        $results[0] = array(); // list characters
        $results[1] = array (); // number of votes for each character
-    
+       
         foreach ($votes as $v) {
             array_push($results[0], $v['DisneyCharacterName']);
             array_push($results[1], $v['VoteCount']);

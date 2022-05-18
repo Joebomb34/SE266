@@ -32,7 +32,7 @@ class Cars{
         $results = [];
         $carTable = $this->carData;
 
-        $stmt = $carTable->prepare("SELECT id, carMake, carModel, carPurchase FROM cars ORDER BY carMake"); 
+        $stmt = $carTable->prepare("SELECT id, carYear, carMake, carModel, carTrans, carColor, carPurchase FROM cars ORDER BY carMake"); 
         
         if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
         {
@@ -44,15 +44,18 @@ class Cars{
     }
 
     //Add a patient to database
-    public function addCar ($carMake, $carModel, $carPurchase) {
+    public function addCar ($carYear, $carMake, $carModel, $carTrans, $carColor, $carPurchase) {
         $addSuccessful = false;
         $carTable = $this->carData;
 
-        $stmt = $carTable->prepare("INSERT INTO cars SET carMake = :carMake, carModel = :carModel, carPurchase = :carPurchase");
+        $stmt = $carTable->prepare("INSERT INTO cars SET carYear = :carYear, carMake = :carMake, carModel = :carModel, carTrans = :carTrans, carColor = :carColor, carPurchase = :carPurchase");
 
         $boundParams = array(
+            ":carYear" => $carYear,
             ":carMake" => $carMake,
             ":carModel" => $carModel,
+            ":carTrans" => $carTrans,
+            ":carColor" => $carColor,
             ":carPurchase" => $carPurchase
         );
         
@@ -65,16 +68,19 @@ class Cars{
 
 
 //update function to update the table into the database
-    public function updateCar ($id, $carMake, $carModel, $carPurchase)
+    public function updateCar ($id, $carYear, $carMake, $carModel, $carTrans, $carColor, $carPurchase)
     {
         $updateSuccessful = false;
         $carTable = $this->carData;
         
-        $stmt = $carTable->prepare("UPDATE cars SET carMake = :carMake, carModel = :carModel, carPurchase = :carPurchase WHERE id = :id");
+        $stmt = $carTable->prepare("UPDATE cars SET carYear = :carYear, carMake = :carMake, carModel = :carModel, carTrans = :carTrans, carColor = :carColor, carPurchase = :carPurchase WHERE id = :id");
 
         $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':carYear', $carYear);
         $stmt->bindValue(':carMake', $carMake);
         $stmt->bindValue(':carModel', $carModel);
+        $stmt->bindValue(':carTrans', $carTrans);
+        $stmt->bindValue(':carColor', $carColor);
         $stmt->bindValue(':carPurchase', $carPurchase);
 
         $updateSuccessful = ($stmt->execute() && $stmt->rowCount() > 0);
@@ -105,7 +111,7 @@ class Cars{
         $results = [];
         $carTable = $this->carData;
 
-        $stmt = $carTable->prepare("SELECT id, carMake, carModel, carPurchase FROM cars WHERE id = :id");
+        $stmt = $carTable->prepare("SELECT id, carYear, carMake, carModel, carTrans, carColor, carPurchase FROM cars WHERE id = :id");
 
         $stmt->bindValue(':id', $id);
 

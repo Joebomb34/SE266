@@ -27,7 +27,7 @@
 
 <html lang="en">
 <head>
-  <title>View Patient Records</title> 
+  <title>View Cars</title> 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--bootstrap taken from the example...used to style the table-->
@@ -39,37 +39,42 @@
     <div class="container">
         
     <div class="col-sm-offset-2 col-sm-10">
-        <h1>Patient Records</h1>
+        <h1>Cars</h1>
         <br />
-        <a href="updatePatient.php?action=Add">Add Patient</a>  
+        <a href="update.php?action=Add">Add Car</a>  
+        </br> </br>
+        <a href="carList.php?action=Post">Search Cars</a>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Patient First Name</th>
-                <th>Patient Last Name</th>
-                <th>Marrital Status</th>
-                <th>Date of Birth</th>
+                <th>Year</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Transmission</th>
+                <th>Color</th>
+                <th>Purchase Date</th>
                 <th>Update</th>
             </tr>
         </thead>
         <tbody>
       
-        <?php foreach ($patientListing as $row): ?>
+        <?php foreach ($carList as $row): ?>
             <tr>
                 <td>
                     <form action="view.php" method="post">
-                        <input type="hidden" name="patientId" value="<?= $row['id']; ?>" />
+                        <input type="hidden" name="carId" value="<?= $row['id']; ?>" />
                         <button class="btn glyphicon glyphicon-trash" type="submit"></button>
-                        <?php echo $row['id']; ?>
+                        <!-- <?php //echo $row['id']; ?> -->
                       
                 </td>
-                <td><?php echo $row['patientFirstName']; ?></td>
-                <td><?php echo $row['patientLastName']; ?></td>
-                <td><?php echo $row['patientMarried']; ?></td>
-                <td><?php echo $row['patientBirthDate']; ?></td>
+                <td><?php echo $row['carYear']; ?></td>
+                <td><?php echo $row['carMake']; ?></td>
+                <td><?php echo $row['carModel']; ?></td>
+                <td><?php echo $row['carTrans']; ?></td>
+                <td><?php echo $row['carColor'];?></td>
+                <td><?php echo $row['carPurchase']; ?></td>
                 </form> 
-                <td><a href="updatePatient.php?action=Update&patientId=<?= $row['id'] ?>">Update</a></td> 
+                <td><a href="update.php?action=Update&carId=<?= $row['id'] ?>">Update</a></td> 
                 
             </tr>
         <?php endforeach; ?>

@@ -8,7 +8,7 @@ class CarSearch extends Cars
 
     // Allows user to search for either first name, last name, married, or birth date
     // INPUT: first name, last name, or married to search for
-    function searchCars ($carMake, $carModel, $carPurchase) 
+    function searchCars ($carYear, $carMake, $carModel, $carTrans, $carColor) 
     {
         // Set up all the necessary variables here 
         // to ensure they are scoped for the entire function
@@ -21,6 +21,21 @@ class CarSearch extends Cars
         $sqlQuery =  "SELECT * FROM  cars   ";
 $isFirstClause = true;
         // If first name is set, append a patient query and bind parameter
+        if ($carYear != "") {
+            if ($isFirstClause)
+            {
+                $sqlQuery .=  " WHERE ";
+                $isFirstClause = false;
+            }
+            else
+            {
+                $sqlQuery .= " AND ";
+            }
+            $sqlQuery .= "  carYear LIKE :carYear";
+            $binds['carYear'] = '%'.$carYear.'%';
+        }
+
+
         if ($carMake != "") {
             if ($isFirstClause)
             {
@@ -50,7 +65,7 @@ $isFirstClause = true;
             $binds['carModel'] = '%'.$carModel.'%';
         }
         //If Married is set, append the First name, last name query and bind parameter
-        if ($carPurchase != ""){
+        if ($carTrans != ""){
             if ($isFirstClause){
                 $sqlQuery .= " WHERE ";
                 $isFirstClause = false;
@@ -58,8 +73,22 @@ $isFirstClause = true;
             else{
                 $sqlQuery .= " AND ";
             }
-            $sqlQuery .= " carPurchase LIKE :carPurchase";
-            $binds['carPurchase'] = '%'.$carPurchase.'%';
+            $sqlQuery .= " carTrans LIKE :carTrans";
+            $binds['carTrans'] = '%'.$carTrans.'%';
+        }
+
+        if ($carColor != "") {
+            if ($isFirstClause)
+            {
+                $sqlQuery .=  " WHERE ";
+                $isFirstClause = false;
+            }
+            else
+            {
+                $sqlQuery .= " AND ";
+            }
+            $sqlQuery .= "  carColor LIKE :carColor";
+            $binds['carColor'] = '%'.$carColor.'%';
         }
 
         // Create query object from the table
