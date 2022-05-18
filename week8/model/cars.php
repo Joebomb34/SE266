@@ -27,8 +27,8 @@ class Cars{
     }//end constructor
 
     
-    // Get listing of all patients
-    public function getCars () {
+    // Get listing from the database
+    public function getCars() {
         $results = [];
         $carTable = $this->carData;
 
@@ -43,7 +43,7 @@ class Cars{
          return ($results);
     }
 
-    //Add a patient to database
+    //Add to database
     public function addCar ($carYear, $carMake, $carModel, $carTrans, $carColor, $carPurchase) {
         $addSuccessful = false;
         $carTable = $this->carData;
@@ -67,7 +67,7 @@ class Cars{
   
 
 
-//update function to update the table into the database
+//update table into the database
     public function updateCar ($id, $carYear, $carMake, $carModel, $carTrans, $carColor, $carPurchase)
     {
         $updateSuccessful = false;
@@ -89,7 +89,7 @@ class Cars{
     }
 
 
-//Delete function to delete a patient from the database
+//Delete from the database
     public function deleteCar ($id)
     {
         $deleteSuccessful = false;
@@ -105,7 +105,7 @@ class Cars{
     }
 
 
-//Get listing of patient
+//Get listing from the database
     public function getCar ($id)
     {
         $results = [];

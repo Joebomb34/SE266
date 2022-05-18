@@ -1,10 +1,16 @@
 <?php
-    
+    include_once __DIR__ . '/include/header.php';
     include_once __DIR__ . '/model/cars.php';
     include_once __DIR__ . '/include/functions.php';
 
     // Set up configuration file and create database
     $configFile = __DIR__ . '/model/dbconfig.ini';
+
+    if (!isUserLoggedIn())
+    {
+        header ('Location: login.php');
+    }
+
     try 
     {
         $carDatabase = new Cars($configFile);
@@ -13,17 +19,17 @@
     {
         echo "<h2>" . $error->getMessage() . "</h2>";
     }   
-    // If POST, delete the requested team before listing all teams
+    // If POST, delete the requested car before listing all
     if (isPostRequest()) {
         $id = filter_input(INPUT_POST, 'carId');
-        $carDatabase->deleteCar ($id);
+        $carDatabase->deleteCar($id);
 
     }
     $carList = $carDatabase->getCars();
     
 ?>
 
-<!--Creating a table for the patients to be displayed in-->
+<!--Creating a table for the cars to be displayed in-->
 
 <html lang="en">
 <head>
@@ -63,9 +69,7 @@
                 <td>
                     <form action="view.php" method="post">
                         <input type="hidden" name="carId" value="<?= $row['id']; ?>" />
-                        <button class="btn glyphicon glyphicon-trash" type="submit"></button>
-                        <!-- <?php //echo $row['id']; ?> -->
-                      
+                        <button class="btn glyphicon glyphicon-trash" type="submit"></button>                      
                 </td>
                 <td><?php echo $row['carYear']; ?></td>
                 <td><?php echo $row['carMake']; ?></td>
@@ -83,5 +87,6 @@
        
     </div>
     </div>
+    <?php include_once __DIR__ . '/include/footer.php'?>
 </body>
 </html>

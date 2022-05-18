@@ -1,12 +1,12 @@
 <?php
-  // This should already be loaded, but just in case
+  // allowing this file access to functions file
   include_once __DIR__ . '/functions.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Patient Records</title>
+    <title>Cars</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -18,7 +18,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <span class="navbar-brand">Patients</span>
+        <span class="navbar-brand">Cars</span>
       </div>
       <?php
         // We want to hide the Logout button if the user is not logged in

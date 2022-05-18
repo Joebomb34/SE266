@@ -28,7 +28,7 @@
         try 
         {
             $userDatabase = new Users($configFile);
-            echo "made it 6";
+            //echo "made it 6";
         } 
         catch ( Exception $error ) 
         {

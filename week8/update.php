@@ -1,10 +1,19 @@
  <?php
  
   // This code runs everything the page loads
+  include_once __DIR__ . '/include/header.php';
   include_once __DIR__ . '/model/cars.php';
+
+  include_once __DIR__ . '/include/functions.php';
   
   // Set up configuration file and create database
   $configFile = __DIR__ . '/model/dbconfig.ini';
+
+  if (!isUserLoggedIn())
+    {
+        header ('Location: login.php');
+    }
+
   try 
   {
       $carData = new Cars($configFile);
@@ -33,16 +42,16 @@
       //else it is Add and the user will enter patient info
       else 
       {
-          $carYear = "";
+          $carYear = "YYYY";
           $carMake = "";
           $carModel = "";
           $carTrans = "";
           $carColor = "";
-          $carPurchase = "";
+          $carPurchase = "YYYY-MM-DD";
       }
   } // end if GET
 
-  // If it is a POST, we are coming from updatePatient.php
+  // If it is a POST, we are coming from update.php
   // we need to determine action, then return to view.php
   elseif (isset($_POST['action'])) 
   {
@@ -76,7 +85,7 @@
   }
       
 ?>
-    <!--Creating the form to be used to update or add a patient to the database-->
+    <!--Creating the form to be used to update or add a car to the database-->
 
 <html lang="en">
 <head>
@@ -156,11 +165,6 @@
     </div>
 </div>
     <p></p>
-    <!-- <div class="panel panel-warning">
-    <div class="panel-heading"><strong>This is for testing and verification:</strong></div>    
-        Action: <input type="text" name="action" value="<?= $action; ?>">
-        Patient ID: <input type="text" name="teamId" value="<?= $id; ?>">
-      </div> -->
 
   </form>
   
@@ -168,6 +172,6 @@
   <div class="col-sm-offset-2 col-sm-10"><a href="./carList.php">Search Cars</a></div>
 </div>
 </div>
-
+<?php include_once __DIR__ . '/include/footer.php';?>
 </body>
 </html>

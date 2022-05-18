@@ -2,12 +2,11 @@
 
 include_once __DIR__ . '/cars.php';
 
-// Extending the patients class so we can take advantage of work done earlier
+// Extending the class to use the other file
 class CarSearch extends Cars
 {
 
-    // Allows user to search for either first name, last name, married, or birth date
-    // INPUT: first name, last name, or married to search for
+    // Allows user to search
     function searchCars ($carYear, $carMake, $carModel, $carTrans, $carColor) 
     {
         // Set up all the necessary variables here 
@@ -20,7 +19,7 @@ class CarSearch extends Cars
         // specific restrictions to
         $sqlQuery =  "SELECT * FROM  cars   ";
 $isFirstClause = true;
-        // If first name is set, append a patient query and bind parameter
+        // if the user has input, then append the value and bind the parameter
         if ($carYear != "") {
             if ($isFirstClause)
             {
@@ -50,7 +49,7 @@ $isFirstClause = true;
             $binds['carMake'] = '%'.$carMake.'%';
         }
     
-        // If Last name is set, append the First name query and bind parameter
+        
         if ($carModel != "") {
             if ($isFirstClause)
             {
@@ -64,7 +63,7 @@ $isFirstClause = true;
             $sqlQuery .= "  carModel LIKE :carModel";
             $binds['carModel'] = '%'.$carModel.'%';
         }
-        //If Married is set, append the First name, last name query and bind parameter
+        
         if ($carTrans != ""){
             if ($isFirstClause){
                 $sqlQuery .= " WHERE ";

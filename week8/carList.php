@@ -1,7 +1,7 @@
 <?php
-
-    // Load helper functions (which also starts the session) then check if user is logged in
     include_once __DIR__ . '/include/functions.php'; 
+    // Load helper functions (which also starts the session) then check if user is logged in
+    
     if (!isUserLoggedIn())
     {
         header ('Location: login.php');
@@ -19,7 +19,7 @@
     {
         echo "<h2>" . $error->getMessage() . "</h2>";
     }   
-    // If POST, delete the requested team before listing all teams
+    // If POST, delete the requested car before listing all
     $carList = [];
     if (isPostRequest()) 
     {
@@ -57,14 +57,13 @@
                 $carPurchase = $_POST['fieldValue'];
             }
 
-            //echo "patientFirstName: " . $patientFirstName . "   patientLastName: " . $patientLastName . " patientMarried: " . $patientMarried . " patientBirthDate: " . $patientBirthDate;
             $carList = $carDatabase->searchCars($carYear, $carMake, $carModel, $carTrans, $carColor, $carPurchase);
         }
         else
         {
         
             $id = filter_input(INPUT_POST, 'carId');
-            $carDatabase->deleteCar ($id);
+            $carDatabase->deleteCar($id);
             $carList = $carDatabase->getCars();
         }
     }
@@ -105,26 +104,7 @@
        <input type="text" name="fieldValue" />
       <button type="submit" name="Search">Search</button>     
   </form>      
-  <!-- <div style="background-color: #fff0cc; padding: 10px;">
 
-  <h2>Sort Patients [<em>not implemented</em>]</h2>
-<form  action="#" method="post">
-    <input type="hidden" name="action" value="sort">
-       <label>Sort By Field:&nbsp;&nbsp;&nbsp;</label>
-       <select name="fieldName">
-              <option value="">Select One</option>
-              <option value="patientFirstName">First Name</option>
-              <option value="patientLastName">Last Name</option>
-              <option value="patientMarried">Marital Status</option>
-              <option value="patientBirthDate">Birth Date</option>
-              
-          </select>
-       <input type="radio" name="fieldValue" value="ASC" checked />Ascending
-       <input type="radio" name="fieldValue" value="DESC" />Descending
-       
-      <button type="submit"  name="sortPatient">Sort</button>
-</form>  
-</div> -->
     <div class="col-sm-offset-2 col-sm-10">
         <h1>Cars</h1>
         <br />
@@ -132,7 +112,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <!-- <th>ID</th> -->
                 <th>Delete</th>
                 <th>Year</th>
                 <th>Make</th>
@@ -151,7 +130,6 @@
                     <form action="carList.php" method="post">
                         <input type="hidden" name="carId" value="<?= $row['id']; ?>" />
                         <button class="btn glyphicon glyphicon-trash" type="submit"></button>
-                        <!-- <?php //echo $row['id']; ?> -->
                     </form>   
                 </td>
                 <td><?php echo $row['carYear'];?></td>
@@ -169,5 +147,6 @@
        
     </div>
     </div>
+    <?php include_once __DIR__ . '/include/footer.php';?>
 </body>
 </html>
