@@ -47,9 +47,6 @@
     <div class="col-sm-offset-2 col-sm-10">
         <h1>Cars</h1>
         <br />
-        <a href="update.php?action=Add">Add Car</a>  
-        </br> </br>
-        <a href="carList.php?action=Post">Search Cars</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -78,6 +75,7 @@
                 <td><?php echo $row['carColor'];?></td>
                 <td><?php echo $row['carPurchase']; ?></td>
                 </form> 
+                <!--Removed links-->
                 <td><a href="update.php?action=Update&carId=<?= $row['id'] ?>">Update</a></td> 
                 
             </tr>

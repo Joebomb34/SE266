@@ -13,15 +13,57 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-
+<!--added the hyperlinks from the pages as part of the navbar. I wanted them spaced out so I used break tags-->
 <body>
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <span class="navbar-brand">Cars</span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"><a href="update.php?action=Add">Add New Car</a></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"><a href="./carList.php">Search Cars</a></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"></br></span>
+        <span class="navbar-brand"><a href="./view.php">View Cars</a></span>
       </div>
       <?php
-        // We want to hide the Logout button if the user is not logged in
+        // Hide the Logout button if the user is not logged in
         // That means we are on the Login page
         // Since the session should have been destroyed, we first check to see if isLoggedIn exists
         // It may exist if an already logged in user manually loads or reloads login.php 

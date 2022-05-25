@@ -106,7 +106,7 @@
   <div class="panel panel-primary">
 <div class="panel-heading"><h4><?= $action; ?> Car</h4></div>
 <p></p>
-
+<!--Dropped the word 'Car' from the labels-->
     <div class="form-group">
       <label class="control-label col-sm-2" for="carId">ID:</label>
       <div class="col-sm-10">
@@ -160,16 +160,13 @@
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default"><?php echo $action; ?> Car</button>
         <input type="hidden" name="action" value="<?= $action; ?>">
-        
+        <!--Removed links-->
       </div>
     </div>
 </div>
     <p></p>
 
   </form>
-  
-  <div class="col-sm-offset-2 col-sm-10"><a href="./view.php">View Cars</a></div>
-  <div class="col-sm-offset-2 col-sm-10"><a href="./carList.php">Search Cars</a></div>
 </div>
 </div>
 <?php include_once __DIR__ . '/include/footer.php';?>

@@ -85,7 +85,7 @@
 
     array_multisort($carMake, SORT_ASC, $carMake, SORT_ASC, $carList);
 
-// Preliminaries are done, load HTML page header
+// Load HTML page header
     include_once __DIR__ . "/include/header.php";
 
 ?>
@@ -108,7 +108,7 @@
     <div class="col-sm-offset-2 col-sm-10">
         <h1>Cars</h1>
         <br />
-        <a href="update.php?action=Add">Add New Car</a>      
+        <!--Removed links-->     
     <table class="table table-striped">
         <thead>
             <tr>

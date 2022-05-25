@@ -57,6 +57,7 @@
 ?>
 
 <div class="container">
+    <!--added a header to the page-->
     <h2>Cars</h2>
     <?php 
         if ($message)
