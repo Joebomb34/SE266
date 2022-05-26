@@ -7,6 +7,8 @@
 	/* Note:
 		You should implement all other methods in the class
 	*/
+
+    //require "atm_starter.php";
 	
     abstract class Account 
     {
@@ -16,12 +18,16 @@
         
         public function __construct ($id, $bal, $startDt) 
         {
-           // write code here
+           $this->accountId = $id;
+           $this->balance = $bal;
+           $this->startDate = $startDt;
         } // end constructor
         
         public function deposit ($amount) 
         {
-            // write code here
+            $this->balance = $this->balance + $amount;
+            return $this->balance;
+
         } // end deposit
 
         abstract public function withdrawal($amount);
@@ -31,23 +37,26 @@
         
         public function getStartDate() 
         {
-            // write code here
+            return $this->startDate;
         } // end getStartDate
 
         public function getBalance() 
         {
-            // write code here
+            return $this->balance;
+            
         } // end getBalance
 
         public function getAccountId() 
         {
-            // write code here
+            return $this->accountId;
         } // end getAccountId
 
         // Display AccountID, Balance and StartDate in a nice format
         protected function getAccountDetails()
         {
-            // write code here
+            return "Account ID: " . $this->accountId . "<br />" .
+            "Balance: " . $this->balance . "<br />" . 
+            "Start Date: " . $this->startDate;
         } // end getAccountDetails
         
     } // end account
